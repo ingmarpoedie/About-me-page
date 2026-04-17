@@ -10,7 +10,7 @@ export default function SocialsPage() {
     const t = translations[language];
 
     return (
-        <main className="min-h-screen bg-slate-50 px-6 py-12 text-slate-900">
+        <main className="min-h-screen bg-background px-6 py-12 text-slate-900">
             <div className="mx-auto max-w-4xl">
                 <ScrollReveal className="reveal-up" delay={0}>
                 <div className="mb-6 flex items-center justify-between rounded-2xl bg-white/80 p-4 shadow-sm shadow-slate-900/5">
