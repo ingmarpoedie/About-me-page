@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #e4ddaa;
-  --foreground: #dfd3a1;
+  --background: #eef4ff;
+  --foreground: #0f172a;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+  --accent: #0284c7;
+  --accent-soft: #bae6fd;
+  --text-muted: #475569;
 }
 
 @theme inline {
@@ -23,4 +28,111 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif, Georgia, s 'Times New Roman', Times, serif;
+}
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateZ(0);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: opacity, transform;
+    pointer-events: none;
+  }
+
+  .reveal:not(.visible) {
+    transform: translate3d(0, 32px, 0);
+  }
+
+  .reveal.reveal-left:not(.visible) {
+    transform: translate3d(-60px, 0, 0);
+  }
+
+  .reveal.reveal-right:not(.visible) {
+    transform: translate3d(60px, 0, 0);
+  }
+
+  .reveal.reveal-up:not(.visible) {
+    transform: translate3d(0, 48px, 0);
+  }
+
+  .reveal.reveal-diagonal:not(.visible) {
+    transform: translate3d(-40px, 40px, 0);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s;
+    pointer-events: auto;
+  }
+}
+
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.9s ease-out both;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 1s ease-out both;
+  }
+
+  .animate-pop {
+    animation: pop 0.5s ease-out both;
+  }
+
+  .animate-dropdown {
+    animation: dropdown 0.22s ease-out both;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes dropdown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

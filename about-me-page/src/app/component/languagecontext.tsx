@@ -1,11 +1,18 @@
 'use client'
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 
-const LanguageContext = createContext<any>(null);
+type Language = "en" | "nl";
 
-export function LanguageProvider({ children }: any) {
-  const [language, setLanguage] = useState("en");
+type LanguageContextType = {
+  language: Language;
+  setLanguage: (language: Language) => void;
+};
+
+const LanguageContext = createContext<LanguageContextType | null>(null);
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguage] = useState<Language>("en");
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>
@@ -14,7 +21,13 @@ export function LanguageProvider({ children }: any) {
   );
 }
 
-// 👇 THIS PART IS PROBABLY MISSING
+
 export function useLanguage() {
-  return useContext(LanguageContext);
+  const context = useContext(LanguageContext);
+
+  if (!context) {
+    throw new Error("useLanguage must be used within LanguageProvider");
+  }
+
+  return context;
 }
